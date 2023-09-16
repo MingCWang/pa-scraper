@@ -22,6 +22,7 @@ export PA_NAME='' # The name of the PA you want to download, has to be the same 
 You should see chrome being opened, complete the DUO authentication. The script should start downloading the files to the directory you specified in the `DOWNLOAD_DIR` variable.
 
 ## Result
+After making sure you have all the files in the specified directory, the script will prompt you to press enter. After you press enter, the script will print out the following result:
 ```
 ==========================================
 
@@ -35,3 +36,4 @@ No submission emails:
 ==========================================
 
 ```
+## If you have any suggestions feel free to open an issue or email mingshihwang@brandeis.edu
