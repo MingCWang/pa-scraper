@@ -9,13 +9,22 @@ TAs get assigned a number of students to grade their programming assignments. Ho
   pip install -r requirements.txt 
 ```
 ### 2. Configure settings
-in the `script.sh` file, set the following variables:
+- in the `script.sh` file, set the following variables:
 
 ```
 export PWD='' # Your Brandeis login password
 export UNAME='' # Your Brandeis login username
 export DOWNLOAD_DIR='' # The directory you want to download the files to
 export PA_NAME='' # The name of the PA you want to download, has to be the same as the name of the PA on LATTE
+```
+- in the `emails.txt` file, add the emails of the students who you are assigned to like so.
+```
+student1@brandeis.edu
+student2@brandeis.edu
+.
+.
+.
+
 ```
 ### 3. Run the script
 ```
