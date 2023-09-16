@@ -1,4 +1,6 @@
 # pa-scraper
+## What is this?
+TAs get assigned a number of students to grade their programming assignments. However, the submission website LATTE does not provide a way to download these files all at once. This script automates the process of downloading all the files from LATTE. It also provides a summary of the number of students who submitted their assignments and a list of students who did not submit their assignments.
 ## How to run
 ### 1. Install dependencies
 ```
@@ -23,6 +25,7 @@ You should see chrome being opened, complete the DUO authentication. The script 
 
 ## Result
 After making sure you have all the files in the specified directory, the script will prompt you to press enter. After you press enter, the script will print out the following result:
+
 ```
 ==========================================
 
