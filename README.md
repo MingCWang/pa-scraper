@@ -15,7 +15,7 @@ TAs get assigned a number of students to grade their programming assignments. Ho
   pip install -r requirements.txt 
 ```
 ### 2. Configure settings
-- in the `script.sh` file, set the following variables:
+- in the `script.sh` file, set the following variables including the quotes:
 
 ```
 export PWD='' # Your Brandeis login password
