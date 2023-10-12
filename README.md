@@ -2,10 +2,16 @@
 ## What is this?
 TAs get assigned a number of students to grade their programming assignments. However, the submission website LATTE does not provide a way to download these files all at once. This script automates the process of downloading all the files from LATTE. It also provides a summary of the number of students who submitted their assignments and a list of students who did not submit their assignments.
 ## How to run
-### 1. Install dependencies
+### 1. Clone repository
+- Create a folder and navigate to the folder in your terminal/shell paste the following commands:
 ```
-  python -m venv .venv # or python3.10 / python3 if this gives you an error
-  . .venv/bin/activate # or . .venv/scripts/activate if you are on windows
+  git init 
+  git clone https://github.com/MingCWang/pa-scraper.git
+```
+- Install dependencies
+```
+  python -m venv .venv or python3 -m venv .venv
+  . .venv/bin/activate or . .venv/scripts/activate (for windows)
   pip install -r requirements.txt 
 ```
 ### 2. Configure settings
@@ -14,7 +20,7 @@ TAs get assigned a number of students to grade their programming assignments. Ho
 ```
 export PWD='' # Your Brandeis login password
 export UNAME='' # Your Brandeis login username
-export DOWNLOAD_DIR='' # The directory you want to download the files to
+export DOWNLOAD_DIR='' # The directory you want to download the files to e.x. /Users/username/Desktop/PA1
 ```
 - in the `emails.txt` file, add the emails of the students who you are assigned to like so.
 ```
