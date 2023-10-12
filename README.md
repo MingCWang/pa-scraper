@@ -10,8 +10,8 @@ TAs get assigned a number of students to grade their programming assignments. Ho
 ```
 - Install dependencies
 ```
-  python -m venv .venv or python3 -m venv .venv
-  . .venv/bin/activate or . .venv/scripts/activate (for windows)
+  python -m venv .venv OR python3 -m venv .venv
+  . .venv/bin/activate OR . .venv/scripts/activate (for windows)
   pip install -r requirements.txt 
 ```
 ### 2. Configure settings
