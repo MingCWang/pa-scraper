@@ -15,7 +15,6 @@ TAs get assigned a number of students to grade their programming assignments. Ho
 export PWD='' # Your Brandeis login password
 export UNAME='' # Your Brandeis login username
 export DOWNLOAD_DIR='' # The directory you want to download the files to
-export PA_NAME='' # The name of the PA you want to download, has to be the same as the name of the PA on LATTE
 ```
 - in the `emails.txt` file, add the emails of the students who you are assigned to like so.
 ```
@@ -27,10 +26,16 @@ student2@brandeis.edu
 
 ```
 ### 3. Run the script
+1. Navigate to your terminal/shell and run the following command:
 ```
   bash script.sh
 ```
-You should see chrome being opened, complete the DUO authentication. The script should start downloading the files to the directory you specified in the `DOWNLOAD_DIR` variable.
+2. You should see chrome being opened, complete the DUO authentication. 
+3. The script will direct you to course COSI 12B, click on the PA folder so you can see this button. (if you are not in this course, you can change the course name scraper file.)
+<img width="310" alt="Screen Shot 2023-10-11 at 11 59 45 PM" src="https://github.com/MingCWang/pa-scraper/assets/73949957/d4e2b269-887f-45fe-abff-21e446c03a78"> 
+
+4. Click enter in the terminal to start downloading the files.
+5. The script should start downloading the files to the directory you specified in the `DOWNLOAD_DIR` variable.
 
 ## Result
 After making sure you have all the files in the specified directory, the script will prompt you to press enter. After you press enter, the script will print out the following result:
@@ -38,12 +43,15 @@ After making sure you have all the files in the specified directory, the script 
 ```
 ==========================================
 
-Duration: 19.5 seconds
-Students: 15
-Submissions: 14
-No submission: 1
+
+Duration: 37.5 seconds
+Students: 11
+Submissions: 11
+Late submissions: 
+['student@brandeis.edu: 20 hours 43 mins late', 'student2@brandeis.edu: 1 day 21 hours late']
+No submission: 0
 No submission emails:
-['student@brandeis.edu']
+[]
         
 ==========================================
 

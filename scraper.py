@@ -6,6 +6,7 @@ from driver import driver_configuaration
 from scraper_files import scraper
 import time
 import os
+import asyncio
 
 
 def authenticate(driver, username, password):
@@ -38,6 +39,7 @@ def main():
     # Get the value of an environment variable
     password = os.environ.get("PWD")
     username = os.environ.get("UNAME")
+    course = os.environ.get("COURSE")
 
     driver = driver_configuaration(download_directory)
     driver.get("https://moodle2.brandeis.edu/my/")
@@ -46,7 +48,9 @@ def main():
     authenticate(driver, username, password)
     start_time = time.time()
     # scrape the page
-    submissions, students, no_submissions_list = scraper(driver, text_to_find)
+    submissions, students, no_submissions_list, late_submissions_list = asyncio.run(
+        scraper(driver, text_to_find, course)
+    )
 
     no_submissions = students - submissions
     end_time = time.time()
@@ -56,6 +60,8 @@ def main():
         f"""Duration: {duration} seconds
 Students: {students}
 Submissions: {submissions}
+Late submissions: 
+{late_submissions_list}
 No submission: {no_submissions}
 No submission emails:
 {no_submissions_list}

@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 import time
+import asyncio
 
 
 def student_emails():
@@ -17,6 +18,7 @@ def get_student_files(page_num, driver, emails, sleep_time=0):
     """This function will download the files students who were assigned to the grader"""
     no_submissions = []
     downloaded_files = 0
+    late_submission = []
 
     for i in range(page_num):
         student_container = driver.find_element(
@@ -40,6 +42,21 @@ def get_student_files(page_num, driver, emails, sleep_time=0):
                             )
                         )
                     ).click()
+
+                    print(f"Downloading {student_email}'s submission")
+                    try:
+                        element = WebDriverWait(student, 2).until(
+                            EC.element_to_be_clickable(
+                                (
+                                    By.XPATH,
+                                    ".//td[contains(@class, 'c4')]//div[contains(@class, 'latesubmission')]",
+                                )
+                            )
+                        )
+                        late = element.text
+                        late_submission.append(f"{student_email}: {late}")
+                    except:
+                        pass
                     print(f"Downloading {student_email}'s submission")
                     # time.sleep(sleep_time)
                     downloaded_files += 1
@@ -61,10 +78,10 @@ def get_student_files(page_num, driver, emails, sleep_time=0):
                 )
             )
             driver.execute_script("arguments[0].click();", page)
-    return downloaded_files, no_submissions
+    return downloaded_files, no_submissions, late_submission
 
 
-def scraper(driver, text_to_find, sleep_time=3):
+async def scraper(driver, text_to_find, course, sleep_time=0):
     """This function is the actual scraper that will scrape the page and download the files"""
     emails = student_emails()
     try:
@@ -73,25 +90,28 @@ def scraper(driver, text_to_find, sleep_time=3):
             EC.element_to_be_clickable(
                 (
                     By.XPATH,
-                    "//*[contains(text(), '233COSI-10A-2 : Introduction to Problem Solving in Python')]",
+                    f"//*[contains(text(), '{course}')]",
                 )
             )
         ).click()
         # click on programming assignments
 
-        WebDriverWait(driver, 30).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, f"//a[.//span[text()='Programming Assignments (PAs)']]")
-            )
-        ).click()
+        # WebDriverWait(driver, 30).until(
+        #     EC.element_to_be_clickable(
+        #         (By.XPATH, f"//a[.//span[text()='Programming Assignments (PAs)']]")
+        #     )
+        # ).click()
         # click on the PA
 
-        pa_container = driver.find_element(By.ID, "collapse-1")
-        WebDriverWait(pa_container, 30).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, f"//a[.//span[text()='{text_to_find}']]")
-            )
-        ).click()
+        # pa_container = driver.find_element(By.ID, "collapse-1")
+        # WebDriverWait(pa_container, 30).until(
+        #     EC.element_to_be_clickable(
+        #         (By.XPATH, f"//a[.//span[text()='{text_to_find}']]")
+        #     )
+        # ).click()
+
+        input("Press Enter to continue after you have clicked on the PA...")
+
         WebDriverWait(driver, 30).until(
             EC.element_to_be_clickable(
                 (By.XPATH, "//*[contains(text(), 'View all submissions')]")
@@ -108,7 +128,7 @@ def scraper(driver, text_to_find, sleep_time=3):
             - 2
         ) // 2
 
-        downloaded_files, no_submissions = get_student_files(
+        downloaded_files, no_submissions, late_submissions = get_student_files(
             page_num, driver, emails, sleep_time
         )
 
@@ -116,6 +136,6 @@ def scraper(driver, text_to_find, sleep_time=3):
             "Press Enter to continue after all the files are downloaded to exit the tool..."
         )
 
-        return downloaded_files, len(emails), no_submissions
+        return downloaded_files, len(emails), no_submissions, late_submissions
     except Exception as e:
         print("Error: ", e)
